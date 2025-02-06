@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import axios from "axios";
 
 const UrlShortener: React.FC = () => {
-  const [originalUrl, setOriginalUrl] = useState("");
+  const [origUrl, setOrigUrl] = useState("");
   const [slug, setSlug] = useState("");
   const [shortUrl, setShortUrl] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -15,7 +15,7 @@ const UrlShortener: React.FC = () => {
 
     try {
       const response = await axios.post("/api/links", {
-        longUrl: originalUrl,
+        longUrl: origUrl,
         slug,
       });
 
@@ -52,9 +52,9 @@ const UrlShortener: React.FC = () => {
           label="Original URL"
           variant="outlined"
           fullWidth
-          value={originalUrl}
+          value={origUrl}
           onChange={(e) =>
-            setOriginalUrl(e.target.value)}
+            setOrigUrl(e.target.value)}
           required
         />
         <TextField
