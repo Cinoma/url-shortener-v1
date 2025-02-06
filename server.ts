@@ -1,10 +1,4 @@
-import {
-  createLink,
-  deleteLink,
-  getLink,
-  getLinks,
-  updateLink,
-} from "./src/controllers/linkController.ts";
+import { createLink, getLink } from "./src/controllers/linkController.ts";
 
 const handler = async (req: Request) => {
   const url = new URL(req.url);
@@ -18,17 +12,17 @@ const handler = async (req: Request) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers });
   }
-
   if (req.method === "GET" && path === "/api") {
     return new Response("Healthy API!");
   }
-
-  if ((req.method === "POST" || req.method === "OPTIONS") && path === "/api/links") {
+  if (
+    (req.method === "POST" || req.method === "OPTIONS") && path === "/api/links"
+  ) {
     return await createLink(req, headers);
-  } else if (req.method === "GET") {
+  }
+  if (req.method === "GET") {
     return await getLink(req);
   }
-
   return new Response("Method Not Allowed", { status: 405, headers });
 };
 

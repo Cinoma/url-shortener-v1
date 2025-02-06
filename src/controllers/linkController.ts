@@ -60,12 +60,15 @@ async function getLink(req: Request): Promise<Response> {
     if (link) {
       return Response.redirect(link.longUrl);
     }
-    return new Response(JSON.stringify({ error: "Link not found" }), { status: 404 });
+    return new Response(JSON.stringify({ error: "Link not found" }), {
+      status: 404,
+    });
   } catch (_error) {
-    return new Response(JSON.stringify({ error: "Internal Server Error" }), { status: 500 });
+    return new Response(JSON.stringify({ error: "Internal Server Error" }), {
+      status: 500,
+    });
   }
 }
-
 
 async function updateLink(id: string, req: Request): Promise<Response> {
   try {

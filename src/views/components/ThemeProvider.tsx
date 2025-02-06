@@ -1,6 +1,6 @@
 import {
-  ThemeProvider as MuiThemeProvider,
   createTheme,
+  ThemeProvider as MuiThemeProvider,
 } from "@mui/material/styles";
 import React, { createContext, useContext, useEffect, useState } from "react";
 
