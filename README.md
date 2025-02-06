@@ -138,7 +138,7 @@ You will need the following applications pre-installed on your machine in order 
 ### Installation
 
 1. Get access to my MongoDB `.env` file and place it in the root directory or create your own file and populate with the following data. <br>*[Setup a free MongoDB cluster](https://cloud.mongodb.com/v2/618724d15cd75376ef93ff2c#/clusters)*
-   ```shell
+    ```shell
     MONGODB_URI="<your_URI_here>"
     DB_NAME="<your_db_name_here>"
     ```
@@ -197,19 +197,19 @@ You will need the following applications pre-installed on your machine in order 
 
 3. Use a `curl` command with the link that the frontend creates. **Be sure to make sure you're using port** `8000`
 
-  ```sh
-  curl --request GET \
-  --url http://localhost:8000/example
-  ```
+    ```sh
+    curl --request GET \
+    --url http://localhost:8000/example
+    ```
 
 4. Click the link and you should be redirected.
 
 5. If you want to deploy your code via deno run the following in the root dir
-  ```sh
-  deno task build
-  cd /dist
-  deployctl deploy --project=<your_project_name> --entrypoint=jsr:@std/http/file-server
-  ``` 
+    ```sh
+    deno task build
+    cd /dist
+    deployctl deploy --project=<your_project_name> --entrypoint=jsr:@std/http/file-server
+    ``` 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -217,7 +217,7 @@ You will need the following applications pre-installed on your machine in order 
 ## Lessons Learned
 
 - Building via deno was fun but not the  most time effective since it took a while to troubleshoot issues like deno not being detected by my IDE so I was unable to use intellisense for the beginning parts of the project.
-- This website is massively overengineered for such a simple project. I really wanted showcase my skills so I don't regret doing it this way but if I could do this again I would utilize a service like Firebase for the backend as there would be less time spent trying to get different technologies to communicate with each other since Firebase could handle the server, db, and deployment. In a similar vain, frameworks like Ruby On Rails and Laravel would've helped me develop this application in half the time.
+- This website is massively overengineered for such a simple project. I really wanted showcase my skills so I don't regret doing it this way but if I could do this again I would utilize a service like [Firebase](https://firebase.google.com/) for the backend as there would be less time spent trying to get different technologies to communicate with each other since Firebase could handle the server, db, and deployment. In a similar vain, frameworks like [Ruby On Rails](https://rubyonrails.org/) and [Laravel](https://laravel.com/) would've helped me develop this application in half the time.
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
