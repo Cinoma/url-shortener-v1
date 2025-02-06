@@ -22,7 +22,7 @@ async function createLink(req: Request, headers: Headers): Promise<Response> {
     }
     const link: Link = {
       longUrl,
-      slug: slug || pswGen.generate(15, true, true, false), // Base64 encode if slug is not provided
+      slug: slug || pswGen.generate(15, true, true, false),
       createdAt: new Date(),
     };
     await linkCol.insertOne(link);
