@@ -95,7 +95,7 @@ I decided to utilize [Vite][Vite-url] as the build tool, [React][React-url] and 
 
 I chose React and MaterialUI because I had previous experience with React and didn't want to spend too much time on the frontend so I could showcase my backend development skills. However, I picked MongoDB because a a non-relational database like MongoDB because in a production environment it would provide high availability and would be easy to scale to millions of users. I have been hearing a lot of buzz on Deno since the release of Deno2, so this seemed like a really good opportunity to try it out especially because ideally it would reduce the number of packages I would have to pull in externally.
 
-Additionally in order to allow 
+Additionally considering that the company I built this for is used to organizing their code in an MVC fashion, I organized my code accordingly to allow for them to have an easier time following along.
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
