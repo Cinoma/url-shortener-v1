@@ -6,31 +6,31 @@ import {
   updateLink,
 } from "./src/controllers/linkController.ts";
 
-const PORT = 3000;
-
-async function handler(req: Request): Promise<Response> {
+const handler = async (req: Request) => {
   const url = new URL(req.url);
   const path = url.pathname;
-  const id = path.split("/")[3];
+  const headers = new Headers({
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type",
+  });
 
-  if (req.method === "GET" && path === "/") {
-    return new Response("Hello, World!");
-  } else if (req.method === "POST" && path === "/api/links") {
-    return await createLink(req);
-  } else if (req.method === "GET" && path === "/api/links") {
-    return await getLinks(req);
-  } else if (req.method === "GET" && path === "/api/links/incomplete/count") {
-    // Handle GET /api/links/incomplete/count
-  } else if (req.method === "GET" && path.startsWith("/api/links/")) {
-    return await getLink(id);
-  } else if (req.method === "PUT" && path.startsWith("/api/links/")) {
-    return await updateLink(id, req);
-  } else if (req.method === "DELETE" && path.startsWith("/api/links/")) {
-    return await deleteLink(id);
-  } else {
-    return new Response("Not Found", { status: 404 });
+  if (req.method === "OPTIONS") {
+    return new Response(null, { headers });
   }
-}
 
-console.log(`HTTP webserver running. Access it at: http://localhost:${PORT}/`);
-Deno.serve({ port: PORT }, handler);
+  if (req.method === "GET" && path === "/api") {
+    return new Response("Healthy API!");
+  }
+
+  if ((req.method === "POST" || req.method === "OPTIONS") && path === "/api/links") {
+    return await createLink(req, headers);
+  } else if (req.method === "GET") {
+    return await getLink(req);
+  }
+
+  return new Response("Method Not Allowed", { status: 405, headers });
+};
+
+console.log("Server running on http://localhost:8000");
+Deno.serve(handler);
