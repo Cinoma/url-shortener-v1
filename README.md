@@ -166,7 +166,7 @@ You will need the following applications pre-installed on your machine in order 
 
 
 
-<!-- USAGE EXAMPLES -->
+<!-- USAGE -->
 ## Usage
 
 1. First spin up the backend locally
@@ -195,16 +195,14 @@ You will need the following applications pre-installed on your machine in order 
    ➜  press h + enter to show help
    ```
 
-3. Use a `curl` command with the link that the frontend creates. **Be sure to make sure you're using port** `8000`
+3. Visit `http://localhost:5173/` and try the application yourself. **Make sure your short URL is using port:** `8000`
 
     ```sh
     curl --request GET \
     --url http://localhost:8000/example
     ```
 
-4. Click the link and you should be redirected.
-
-5. If you want to deploy your code via deno run the following in the root dir
+4. If you want to deploy your code via deno run the following in the root dir
     ```sh
     deno task build
     cd /dist
