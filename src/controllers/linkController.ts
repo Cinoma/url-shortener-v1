@@ -22,6 +22,7 @@ async function createLink(req: Request, headers: Headers): Promise<Response> {
     }
     const link: Link = {
       longUrl,
+      // This generates a random string without symbols if there is no slug present
       slug: slug || pswGen.generate(15, true, true, false),
       createdAt: new Date(),
     };

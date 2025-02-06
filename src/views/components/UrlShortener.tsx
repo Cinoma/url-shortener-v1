@@ -3,6 +3,9 @@ import React, { useState } from "react";
 
 import axios from "axios";
 
+// TODO: Change this when application has a dedicated backend server.
+const baseUrl = "http://localhost:8000";
+
 const UrlShortener: React.FC = () => {
   const [origUrl, setOrigUrl] = useState("");
   const [slug, setSlug] = useState("");
@@ -14,12 +17,18 @@ const UrlShortener: React.FC = () => {
     setError(null);
 
     try {
-      const response = await axios.post("/api/links", {
+      const response = await axios.post(`${baseUrl}/api/links`, {
         longUrl: origUrl,
         slug,
       });
 
-      setShortUrl(`${window.location.origin}/${response.data.slug}`);
+      // This ensures we use the right base URL whether local or in production
+      let respUrl = window.location.origin;
+      if (respUrl.startsWith("http://localhost")) {
+        respUrl = baseUrl;
+      }
+
+      setShortUrl(`${respUrl}/${response.data.slug}`);
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         setError(error.response.data.error);
@@ -53,8 +62,7 @@ const UrlShortener: React.FC = () => {
           variant="outlined"
           fullWidth
           value={origUrl}
-          onChange={(e) =>
-            setOrigUrl(e.target.value)}
+          onChange={(e) => setOrigUrl(e.target.value)}
           required
         />
         <TextField
@@ -62,8 +70,7 @@ const UrlShortener: React.FC = () => {
           variant="outlined"
           fullWidth
           value={slug}
-          onChange={(e) =>
-            setSlug(e.target.value)}
+          onChange={(e) => setSlug(e.target.value)}
           style={{ marginTop: "20px" }}
         />
         <Button
