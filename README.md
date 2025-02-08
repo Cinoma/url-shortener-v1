@@ -226,11 +226,12 @@ You will need the following applications pre-installed on your machine in order 
 ## Roadmap
 
 - [ ] Deploy backend separately and allow the frontend to talk to the live backend service without hindering local development functionality.
-- [ ] Allow for creating user accounts
-  - [ ] Add a User model with username and password and tie Users to the links they generate
-  - [ ] Build a login page or modal to handle user authentication
+- [ ] Allow for creating user accounts.
+  - [ ] Add a User model with username and password and tie Users to the links they generate.
+  - [ ] Build a login page or modal to handle user authentication.
   - [ ] Add security restrictions for preventing one user from editing or viewing another user's links.
-- [ ] High-level design documents
+- [ ] High-level design documents.
+- [ ] Add Unit tests.
 
 See the [open issues](https://github.com/Cinoma/url-shortener-v1/issues) for a full list of proposed features (and known issues).
 
