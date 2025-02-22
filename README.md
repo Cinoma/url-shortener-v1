@@ -30,7 +30,7 @@
   <p align="center">
     A take-home project showcasing my full-stack capabilities 
     <br />
-    <a href="https://github.com/Cinoma/url-shortener-v1/tree/e647c4ef3f2b5dfecebc3424081e1dab426090fa/docs"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/Cinoma/url-shortener-v1/blob/main/docs"><strong>Explore the docs »</strong></a>
     <br />
     <br />
     <a href="https://url-shortener-v1.deno.dev/">View Demo</a>
