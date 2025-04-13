@@ -33,6 +33,11 @@ jobs:
 
       - name: Build step
         run: "npm run build"
+        env:
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          DB_NAME: ${{ secrets.DB_NAME }}
+          DENO_ENV: "production"
+          VITE_API_URL: "https://url-shortener-v1.deno.dev"
 
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
@@ -40,5 +45,8 @@ jobs:
           project: "url-shortener-v1"
           entrypoint: "https://deno.land/std@0.217.0/http/file_server.ts"
           root: "dist"
-          
-          
+        env:
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          DB_NAME: ${{ secrets.DB_NAME }}
+          DENO_ENV: "production"
+          VITE_API_URL: "https://url-shortener-v1.deno.dev"

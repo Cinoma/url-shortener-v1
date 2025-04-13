@@ -3,8 +3,7 @@ import React, { useState } from "react";
 
 import axios from "axios";
 
-// TODO: Change this when application has a dedicated backend server.
-const baseUrl = "http://localhost:8000";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const UrlShortener: React.FC = () => {
   const [origUrl, setOrigUrl] = useState("");
@@ -17,18 +16,12 @@ const UrlShortener: React.FC = () => {
     setError(null);
 
     try {
-      const response = await axios.post(`${baseUrl}/api/links`, {
+      const response = await axios.post(`${apiUrl}/api/links`, {
         longUrl: origUrl,
         slug,
       });
 
-      // This ensures we use the right base URL whether local or in production
-      let respUrl = window.location.origin;
-      if (respUrl.startsWith("http://localhost")) {
-        respUrl = baseUrl;
-      }
-
-      setShortUrl(`${respUrl}/${response.data.slug}`);
+      setShortUrl(`${apiUrl}/${response.data.slug}`);
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         setError(error.response.data.error);
