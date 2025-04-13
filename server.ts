@@ -31,6 +31,16 @@ const handler = async (req: Request) => {
       return new Response("Not Found", { status: 404, headers });
     }
 
+    // Handle static assets first
+    if (path.startsWith("/assets/")) {
+      console.log(`Serving static asset: ${path}`);
+      return await serveDir(req, {
+        fsRoot: "dist",
+        urlRoot: "",
+        showDirListing: false,
+      });
+    }
+
     // Handle URL redirects
     if (path.length > 1) {
       console.log(`Processing redirect for path: ${path}`); // Debug log
@@ -47,11 +57,12 @@ const handler = async (req: Request) => {
       }
     }
 
-    // Serve static files from the dist directory
-    console.log(`Serving static file for path: ${path}`); // Debug log
+    // Serve index.html for root path and other unmatched routes
+    console.log(`Serving index.html for path: ${path}`);
     return await serveDir(req, {
       fsRoot: "dist",
       urlRoot: "",
+      showDirListing: false,
     });
   } catch (error) {
     console.error("Unhandled error:", error);
@@ -62,8 +73,8 @@ const handler = async (req: Request) => {
   }
 };
 
-// Use the port provided by Deno Deploy or fall back to 8000
 const port = parseInt(Deno.env.get("PORT") || "8000");
 console.log(`Starting server on port ${port}`);
 
-await serve(handler, { port: 8000 });
+await serve(handler, { port });
+

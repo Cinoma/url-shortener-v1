@@ -45,6 +45,8 @@ jobs:
           project: "url-shortener-v1"
           entrypoint: "./server.ts"
           root: "."
+          import-map: "./deno.json"
+          assets: "./dist"
         env:
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
           DB_NAME: ${{ secrets.DB_NAME }}
