@@ -57,3 +57,4 @@ async function getLink(req: Request): Promise<Response> {
 }
 
 export { createLink, getLink };
+

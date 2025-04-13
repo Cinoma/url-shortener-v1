@@ -6,7 +6,6 @@ import { serveDir } from "https://deno.land/std@0.217.0/http/file_server.ts";
 const handler = async (req: Request) => {
   const url = new URL(req.url);
   const path = url.pathname;
-  console.log(`Handling request for path: ${path}`); // Debug log
 
   const headers = new Headers({
     "Access-Control-Allow-Origin": "*",
@@ -17,8 +16,6 @@ const handler = async (req: Request) => {
   try {
     // Handle API routes
     if (path.startsWith("/api")) {
-      console.log(`Processing API request: ${req.method} ${path}`); // Debug log
-
       if (req.method === "OPTIONS") {
         return new Response(null, { headers });
       }
@@ -33,7 +30,6 @@ const handler = async (req: Request) => {
 
     // Handle static assets first
     if (path.startsWith("/assets/")) {
-      console.log(`Serving static asset: ${path}`);
       return await serveDir(req, {
         fsRoot: "dist",
         urlRoot: "",
@@ -43,10 +39,8 @@ const handler = async (req: Request) => {
 
     // Handle URL redirects
     if (path.length > 1) {
-      console.log(`Processing redirect for path: ${path}`); // Debug log
       try {
         const response = await getLink(req);
-        console.log(`Redirect response status: ${response.status}`); // Debug log
         return response;
       } catch (error) {
         console.error("Error handling redirect:", error);
@@ -58,15 +52,13 @@ const handler = async (req: Request) => {
     }
 
     // Serve index.html for root path and other unmatched routes
-    console.log(`Serving index.html for path: ${path}`);
     return await serveDir(req, {
       fsRoot: "dist",
       urlRoot: "",
       showDirListing: false,
     });
   } catch (error) {
-    console.error("Unhandled error:", error);
-    return new Response(JSON.stringify({ error: "Internal Server Error", details: error.message }), {
+    return new Response(JSON.stringify({ error: "Internal Server Error" }), {
       status: 500,
       headers: { ...headers, "Content-Type": "application/json" }
     });
@@ -74,7 +66,6 @@ const handler = async (req: Request) => {
 };
 
 const port = parseInt(Deno.env.get("PORT") || "8000");
-console.log(`Starting server on port ${port}`);
 
 await serve(handler, { port });
 

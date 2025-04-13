@@ -142,8 +142,7 @@ to have an easier time following along.
 
 ## Getting Started
 
-This guide will assist in setting up your project locally and test the
-application yourself. To get a local copy up and running follow these simple
+This guide will assist in setting up your project locally. To get a local copy up and running follow these simple
 steps.
 
 ### Prerequisites
@@ -274,8 +273,7 @@ to run the app locally
 
 ## Roadmap
 
-- [ ] Deploy backend separately and allow the frontend to talk to the live
-      backend service without hindering local development functionality.
+- [X] Deploy backend together with the frontend to fix the live demo without hindering local development functionality.
 - [ ] Allow for creating user accounts.
   - [ ] Add a User model with username and password and tie Users to the links
         they generate.
