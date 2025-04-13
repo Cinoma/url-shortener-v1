@@ -43,8 +43,8 @@ jobs:
         uses: denoland/deployctl@v1
         with:
           project: "url-shortener-v1"
-          entrypoint: "https://deno.land/std@0.217.0/http/file_server.ts"
-          root: "dist"
+          entrypoint: "./server.ts"
+          root: "."
         env:
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
           DB_NAME: ${{ secrets.DB_NAME }}
