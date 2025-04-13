@@ -2,9 +2,33 @@ import Link from "../models/link.ts";
 import { linkCol } from "../../db.ts";
 import pswGen from "@rabbit-company/password-generator";
 
+function normalizeUrl(url: string): string {
+  if (!url.startsWith('http://') && !url.startsWith('https://')) {
+    return `https://${url}`;
+  }
+  return url;
+}
+
+function isValidUrl(url: string): boolean {
+  try {
+    new URL(url);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 async function createLink(req: Request, headers: Headers): Promise<Response> {
   try {
     const { longUrl, slug }: Link = await req.json();
+
+    const normalizedUrl = normalizeUrl(longUrl);
+    if (!isValidUrl(normalizedUrl)) {
+      return new Response(JSON.stringify({ error: "Invalid URL format" }), {
+        status: 400,
+        headers,
+      });
+    }
 
     const existingSlug = await linkCol.findOne({ slug });
     if (existingSlug) {
@@ -13,16 +37,17 @@ async function createLink(req: Request, headers: Headers): Promise<Response> {
         headers,
       });
     }
-    const existingLongUrl = await linkCol.findOne({ longUrl });
+
+    const existingLongUrl = await linkCol.findOne({ longUrl: normalizedUrl });
     if (existingLongUrl) {
       return new Response(JSON.stringify({ slug: existingLongUrl.slug }), {
         status: 201,
         headers,
       });
     }
+
     const link: Link = {
-      longUrl,
-      // This generates a random string without symbols if there is no slug present
+      longUrl: normalizedUrl,
       slug: slug || pswGen.generate(15, true, true, false),
       createdAt: new Date(),
     };
@@ -57,4 +82,3 @@ async function getLink(req: Request): Promise<Response> {
 }
 
 export { createLink, getLink };
-
