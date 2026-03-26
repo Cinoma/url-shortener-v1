@@ -214,7 +214,7 @@ to run the app locally
    ```
 2. Spin up the frontend locally in another terminal window
    ```sh
-   deno task dev
+   npm run dev
    ```
 
    You should see the following in respectively
@@ -243,9 +243,7 @@ to run the app locally
 
 4. If you want to deploy your code via deno run the following in the root dir
    ```sh
-   deno task build
-   cd /dist
-   deployctl deploy --project=<your_project_name> --entrypoint=jsr:@std/http/file-server
+   deno deploy
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
