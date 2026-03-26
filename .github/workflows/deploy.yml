@@ -37,18 +37,12 @@ jobs:
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
           DB_NAME: ${{ secrets.DB_NAME }}
           DENO_ENV: "production"
-          VITE_API_URL: "https://url-shortener-v1.deno.dev"
+          VITE_API_URL: "https://url-shortener-v1.inoma.deno.net"
 
-      - name: Upload to Deno Deploy
-        uses: denoland/deployctl@v1
-        with:
-          project: "url-shortener-v1"
-          entrypoint: "./server.ts"
-          root: "."
-          import-map: "./deno.json"
-          assets: "./dist"
+      - name: Deploy to Deno Deploy
+        run: "deno deploy"
         env:
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
           DB_NAME: ${{ secrets.DB_NAME }}
           DENO_ENV: "production"
-          VITE_API_URL: "https://url-shortener-v1.deno.dev"
+          VITE_API_URL: "https://url-shortener-v1.inoma.deno.net"
