@@ -10,9 +10,6 @@
   },
   "deploy": {
     "org": "inoma",
-    "app": "url-shortener-v1",
-    "assets": [
-      "./dist"
-    ]
+    "app": "url-shortener-v1"
   }
 }
