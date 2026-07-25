@@ -1,6 +1,10 @@
 import { createLink, getLink } from "./src/controllers/linkController.ts";
 import { serveDir } from "https://deno.land/std@0.217.0/http/file_server.ts";
 
+function getErrorMessage(error: unknown): string {
+  return error instanceof Error ? error.message : String(error);
+}
+
 const handler = async (req: Request) => {
   const url = new URL(req.url);
   const path = url.pathname;
@@ -46,7 +50,10 @@ const handler = async (req: Request) => {
       } catch (error) {
         console.error("Error handling redirect:", error);
         return new Response(
-          JSON.stringify({ error: "Redirect failed", details: error.message }),
+          JSON.stringify({
+            error: "Redirect failed",
+            details: getErrorMessage(error),
+          }),
           {
             status: 500,
             headers: { ...headers, "Content-Type": "application/json" },
@@ -61,7 +68,7 @@ const handler = async (req: Request) => {
       urlRoot: "",
       showDirListing: false,
     });
-  } catch (error) {
+  } catch (_error) {
     return new Response(JSON.stringify({ error: "Internal Server Error" }), {
       status: 500,
       headers: { ...headers, "Content-Type": "application/json" },
