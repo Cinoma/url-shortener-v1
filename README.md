@@ -22,7 +22,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://url-shortener-v1.deno.dev/">
+  <a href="https://short.inoma.deno.net/">
     <img src="public/screenshot.png" alt="Logo">
   </a>
 
@@ -151,14 +151,17 @@ You will need the following applications pre-installed on your machine in order
 to run the app locally
 
 - npm
+
   ```sh
   npm install npm@latest -g
   ```
 
 - deno (for macOS and linux)
+
   ```sh
   curl -fsSL https://deno.land/install.sh | sh
   ```
+
   _Please see official deno
   [installation instructions](https://docs.deno.com/runtime/getting_started/installation/)
   if you run into any issues._
@@ -185,11 +188,13 @@ to run the app locally
    git clone https://github.com/Cinoma/url-shortener-v1.git
    ```
 3. Install Deno packages
+
    ```sh
    deno install
    ```
 
 4. Change git remote url to avoid accidental pushes to base project
+
    ```sh
    git remote set-url origin github_username/repo_name
    git remote -v # confirm the changes
@@ -212,17 +217,21 @@ to run the app locally
    ```sh
    deno task dev-server
    ```
+
 2. Spin up the frontend locally in another terminal window
+
    ```sh
    npm run dev
    ```
 
    You should see the following in respectively
+
    ```sh
    Connected to MongoDB
    Server running on http://localhost:8000
    Listening on http://0.0.0.0:8000/
    ```
+
    ```sh
    Task dev vite
 
@@ -271,7 +280,7 @@ to run the app locally
 
 ## Roadmap
 
-- [X] Deploy backend together with the frontend to fix the live demo without hindering local development functionality.
+- [x] Deploy backend together with the frontend to fix the live demo without hindering local development functionality.
 - [ ] Allow for creating user accounts.
   - [ ] Add a User model with username and password and tie Users to the links
         they generate.

@@ -1,9 +1,11 @@
 name: Deploy
 on:
   push:
-    branches: main
+    branches:
+      - main
   pull_request:
-    branches: main
+    branches:
+      - main
 
 jobs:
   deploy:
@@ -37,7 +39,7 @@ jobs:
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
           DB_NAME: ${{ secrets.DB_NAME }}
           DENO_ENV: "production"
-          VITE_API_URL: "https://url-shortener-v1.inoma.deno.net"
+          VITE_API_URL: "https://short.inoma.deno.net"
 
       - name: Deploy to Deno Deploy
         run: "deno deploy"
@@ -45,4 +47,5 @@ jobs:
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
           DB_NAME: ${{ secrets.DB_NAME }}
           DENO_ENV: "production"
-          VITE_API_URL: "https://url-shortener-v1.inoma.deno.net"
+          VITE_API_URL: "https://short.inoma.deno.net"
+          DENO_DEPLOY_TOKEN: ${{ secrets.DENO_DEPLOY_TOKEN }}
